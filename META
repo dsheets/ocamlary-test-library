@@ -1,0 +1,7 @@
+version  = "0.1.0"
+requires = ""
+archive(byte) = "ocamlaryTestLibrary.cma"
+archive(byte, plugin) = "ocamlaryTestLibrary.cma"
+archive(native) = "ocamlaryTestLibrary.cmxa"
+archive(native, plugin) = "ocamlaryTestLibrary.cmxs"
+exist_if = "ocamlaryTestLibrary.cma"

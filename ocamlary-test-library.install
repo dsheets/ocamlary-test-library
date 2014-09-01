@@ -1,0 +1,6 @@
+lib: [
+  "META"
+  "_build/ocamlaryTestLibrary.cma"
+  "_build/ocamlaryTestLibrary.cmi"
+  "_build/ocamlaryTestLibrary.cmti"
+]
