@@ -37,6 +37,10 @@ type ('a,'b) a_function = 'a -> 'b
 *)
 let a_function ~x = x
 
+let fun_fun_fun int_fun = (fun () -> ())
+
+let fun_maybe ?yes () = 0
+
 (** @raise Not_found That's all it does *)
 let not_found () = raise Not_found
 
@@ -126,5 +130,60 @@ type record = {
 (** This comment is for [variant]. *)
 type variant =
 | TagA (** This comment is for [TagA]. *)
-| TagB of int (** This comment is for [TagB]. *)
+| ConstrB of int (** This comment is for [TagB]. *)
 (** This comment is also for [variant]. *)
+
+(** This comment is for [poly_variant]. *)
+type poly_variant = [
+| `TagA (** This comment is for [`TagA]. *)
+| `ConstrB of int (** This comment is for [`ConstrB]. *)
+]
+(** Wow! It was a polymorphic variant! *)
+
+(** This comment is for [full_gadt]. *)
+type (_,_) full_gadt =
+| Tag : (unit,unit) full_gadt
+| First : 'a -> ('a,unit) full_gadt
+| Second : 'a -> (unit,'a) full_gadt
+| Exist : 'b -> (unit, unit) full_gadt
+(** Wow! It was a GADT! *)
+
+(** This comment is for [partial_gadt]. *)
+type 'a partial_gadt =
+| AscribeTag : 'a partial_gadt
+| OfTag of 'a partial_gadt
+| ExistGadtTag : ('a -> 'b) -> 'a partial_gadt
+(** Wow! It was a mixed GADT! *)
+
+(** This comment is for [alias]. *)
+type alias = variant
+
+(** This comment is for [variant_alias]. *)
+type variant_alias = variant =
+| TagA
+| ConstrB of int
+
+(** This comment is for [record_alias]. *)
+type record_alias = record = {
+  field1 : int;
+  field2 : int;
+}
+
+(** This comment is for [poly_variant_union]. *)
+type poly_variant_union = [
+| poly_variant
+| `TagC
+]
+
+(** This comment is for [full_gadt_alias]. *)
+type ('a,'b) full_gadt_alias = ('a,'b) full_gadt =
+| Tag : (unit,unit) full_gadt_alias
+| First : 'a -> ('a,unit) full_gadt_alias
+| Second : 'a -> (unit,'a) full_gadt_alias
+| Exist : 'b -> (unit, unit) full_gadt_alias
+
+(** This comment is for [partial_gadt_alias]. *)
+type 'a partial_gadt_alias = 'a partial_gadt =
+| AscribeTag : 'a partial_gadt_alias
+| OfTag of 'a partial_gadt_alias
+| ExistGadtTag : ('a -> 'b) -> 'a partial_gadt_alias
