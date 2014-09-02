@@ -78,10 +78,12 @@
 module Empty : sig end
 (** This module has a signature without any members. *)
 
-(** {9000 Level 9000 } *)
+(** {9000:9000 Level 9000 } *)
 
 (** A plain module alias of [Empty] *)
 module EmptyAlias = Empty
+
+(** {3:EmptySig EmptySig *)
 
 (** A plain, empty module signature *)
 module type EmptySig = sig end
@@ -96,6 +98,29 @@ module ModuleWithSignature : EmptySig
     @deprecated I don't like this element any more.
 *)
 module ModuleWithSignatureAlias : EmptySigAlias
+
+module type SuperSig = sig
+  module type SubSigA = sig
+    (** {3:SubSig A Labeled Section Header Inside of a Signature *)
+
+    type t
+  end
+  module type SubSigB = sig
+    (** {3:SubSig Another Labeled Section Header Inside of a Signature *)
+
+    type t
+  end
+  module type EmptySig = sig
+    type not_actually_empty
+  end
+end
+
+(** For a good time, see {!SubSig} (general) or
+    {!SuperSig.SubSigA.SubSig} or {!SuperSig.SubSigB.SubSig} or
+    {!SuperSig.EmptySig}. Section {!9000} is also
+    interesting. {!EmptySig} is a general reference but
+    {!section:EmptySig} is the section and {!modtype:EmptySig} is the
+    module signature. *)
 
 (** Some text before exception title. {3 Basic exception stuff} After exception title. *)
 

@@ -18,6 +18,22 @@ module ModuleWithSignature = struct end
 (** A plain module with an alias signature. *)
 module ModuleWithSignatureAlias = struct end
 
+module type SuperSig = sig
+  module type SubSigA = sig
+    (** {3:SubSig A Labeled Section Header Inside of a Signature *)
+
+    type t
+  end
+  module type SubSigB = sig
+    (** {3:SubSig Another Labeled Section Header Inside of a Signature *)
+
+    type t
+  end
+  module type EmptySig = sig
+    type not_actually_empty
+  end
+end
+
 exception Kaboom
 
 (** {!EmptySig} is general but {!module:EmptySig} is a module and
