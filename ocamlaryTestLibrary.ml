@@ -34,7 +34,14 @@ module type SuperSig = sig
   end
 end
 
-exception Kaboom
+(** Unary exception constructor *)
+exception Kaboom of unit
+
+(** Binary exception constructor *)
+exception Kablam of unit * unit
+
+(** Unary exception constructor over binary tuple *)
+exception Kapow  of (unit * unit)
 
 (** {!EmptySig} is general but {!module:EmptySig} is a module and
     {!exception:EmptySig} is this exception. *)
@@ -146,7 +153,10 @@ type record = {
 (** This comment is for [variant]. *)
 type variant =
 | TagA (** This comment is for [TagA]. *)
-| ConstrB of int (** This comment is for [TagB]. *)
+| ConstrB of int (** This comment is for [ConstrB]. *)
+| ConstrC of int * int (** This comment is for binary [ConstrC]. *)
+| ConstrD of (int * int)
+(** This comment is for unary [ConstrD] of binary tuple. *)
 (** This comment is also for [variant]. *)
 
 (** This comment is for [poly_variant]. *)
@@ -181,6 +191,8 @@ type tuple = (alias * alias) * alias * (alias * alias)
 type variant_alias = variant =
 | TagA
 | ConstrB of int
+| ConstrC of int * int
+| ConstrD of (int * int)
 
 (** This comment is for [record_alias]. *)
 type record_alias = record = {
