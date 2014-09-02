@@ -223,15 +223,11 @@ module Functor(EmptyAlias : EmptySigAlias) : sig
 end
 *)
 
-(** TODO: re-enable functor after
-   {{:https://github.com/lpw25/opam-doc-base/issues/25} lpw25/opam-doc-base#25} is fixed
-
 (** This comment is for [FunctorTypeOf]. *)
 module FunctorTypeOf(Collection : module type of CollectionModule) : sig
   (** This comment is for [t]. *)
   type t = Collection.collection
 end
-*)
 
 (** This comment is for [IncludeModuleType]. *)
 module type IncludeModuleType = sig
@@ -257,16 +253,12 @@ type variant =
 (** This comment is for unary [ConstrD] of binary tuple. *)
 (** This comment is also for [variant]. *)
 
-(** TODO: re-enable polymorphic variant after
-    {{:https://github.com/lpw25/opam-doc-base/issues/27} lpw25/opam-doc-base#27} is fixed
-
 (** This comment is for [poly_variant]. *)
 type poly_variant = [
 | `TagA (** This comment is for [`TagA]. *)
 | `ConstrB of int (** This comment is for [`ConstrB]. *)
 ]
 (** Wow! It was a polymorphic variant! *)
-*)
 
 (** This comment is for [full_gadt]. *)
 type (_,_) full_gadt =
@@ -302,16 +294,14 @@ type record_alias = record = {
   field2 : int;
 }
 
-(** TODO: re-enable polymorphic variant union after
-    {{:https://github.com/lpw25/opam-doc-base/issues/27} lpw25/opam-doc-base#27} is fixed
-
 (** This comment is for [poly_variant_union]. *)
 type poly_variant_union = [
 | poly_variant
 | `TagC
 ]
 
-also check constraints and ambiguities
+(*
+ TODO: also check constraints and ambiguities
 *)
 
 (** This comment is for [full_gadt_alias]. *)
