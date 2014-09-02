@@ -81,7 +81,7 @@ module Empty : sig end
 (** A plain module alias of [Empty] *)
 module EmptyAlias = Empty
 
-(** {3:EmptySig EmptySig *)
+(** {3:emptySig EmptySig} *)
 
 (** A plain, empty module signature *)
 module type EmptySig = sig end
@@ -99,12 +99,12 @@ module ModuleWithSignatureAlias : EmptySigAlias
 
 module type SuperSig = sig
   module type SubSigA = sig
-    (** {3:SubSig A Labeled Section Header Inside of a Signature *)
+    (** {3:subSig A Labeled Section Header Inside of a Signature} *)
 
     type t
   end
   module type SubSigB = sig
-    (** {3:SubSig Another Labeled Section Header Inside of a Signature *)
+    (** {3:subSig Another Labeled Section Header Inside of a Signature} *)
 
     type t
   end
@@ -113,11 +113,11 @@ module type SuperSig = sig
   end
 end
 
-(** For a good time, see {!SubSig} (general) or
-    {!SuperSig.SubSigA.SubSig} or {!SuperSig.SubSigB.SubSig} or
+(** For a good time, see
+    {!SuperSig.SubSigA.subSig} or {!SuperSig.SubSigB.subSig} or
     {!SuperSig.EmptySig}. Section {!s9000} is also
     interesting. {!EmptySig} is a general reference but
-    {!section:EmptySig} is the section and {!modtype:EmptySig} is the
+    {!section:emptySig} is the section and {!modtype:EmptySig} is the
     module signature. *)
 
 (** Some text before exception title. {3 Basic exception stuff} After exception title. *)
@@ -315,7 +315,7 @@ type 'a partial_gadt_alias = 'a partial_gadt =
 | OfTag of 'a partial_gadt_alias
 | ExistGadtTag : ('a -> 'b) -> 'a partial_gadt_alias
 
-(** This comment is for {!exn_arrow}. *)
+(** This comment is for {!Exn_arrow}. *)
 exception Exn_arrow : unit -> exn
 
 (** This comment is for {!mutual_constr_a} and {!mutual_constr_b}. *)
