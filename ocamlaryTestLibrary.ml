@@ -158,6 +158,9 @@ type 'a partial_gadt =
 (** This comment is for [alias]. *)
 type alias = variant
 
+(** This comment is for [tuple]. *)
+type tuple = (alias * alias) * alias * (alias * alias)
+
 (** This comment is for [variant_alias]. *)
 type variant_alias = variant =
 | TagA
