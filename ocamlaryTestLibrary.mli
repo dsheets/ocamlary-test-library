@@ -78,7 +78,7 @@
 module Empty : sig end
 (** This module has a signature without any members. *)
 
-(** {9000:9000 Level 9000 } *)
+(** {9000:s9000 Level 9000 } *)
 
 (** A plain module alias of [Empty] *)
 module EmptyAlias = Empty
@@ -117,7 +117,7 @@ end
 
 (** For a good time, see {!SubSig} (general) or
     {!SuperSig.SubSigA.SubSig} or {!SuperSig.SubSigB.SubSig} or
-    {!SuperSig.EmptySig}. Section {!9000} is also
+    {!SuperSig.EmptySig}. Section {!s9000} is also
     interesting. {!EmptySig} is a general reference but
     {!section:EmptySig} is the section and {!modtype:EmptySig} is the
     module signature. *)
