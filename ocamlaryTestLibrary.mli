@@ -315,4 +315,15 @@ type 'a partial_gadt_alias = 'a partial_gadt =
 | OfTag of 'a partial_gadt_alias
 | ExistGadtTag : ('a -> 'b) -> 'a partial_gadt_alias
 
+(** This comment is for {!exn_arrow}. *)
+exception Exn_arrow : unit -> exn
+
+(** This comment is for {!mutual_constr_a} and {!mutual_constr_b}. *)
+type mutual_constr_a =
+| A
+| B_ish of mutual_constr_b
+and mutual_constr_b =
+| B
+| A_ish of mutual_constr_a
+
 (* TODO: classes, class types, packed modules, open types, ...? *)
