@@ -14,6 +14,9 @@
  {- modules with signatures}
  {- modules with aliased signatures}
 }
+
+    David Sheets is the author.
+    @author David Sheets
 *)
 
 (**
@@ -51,11 +54,6 @@
 
 (**
     Here are some escaped brackets: \{ \[ \@ \] \}
-*)
-
-(**
-   David Sheets is the author.
-   @author David Sheets
 *)
 
 (** An unassociated comment *)
