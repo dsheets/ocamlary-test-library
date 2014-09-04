@@ -229,3 +229,5 @@ type mutual_constr_a =
 and mutual_constr_b =
 | B
 | A_ish of mutual_constr_a
+
+class empty_class = object val x = 0 end

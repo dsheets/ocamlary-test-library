@@ -326,4 +326,8 @@ and mutual_constr_b =
 | B
 | A_ish of mutual_constr_a
 
-(* TODO: classes, class types, packed modules, open types, ...? *)
+(** TODO: re-enable when {{:https://github.com/lpw25/opam-doc-base/issues/34} lpw25/opam-doc-base#34} has been addressed
+class empty_class : object end
+*)
+
+(* TODO: classes, class types, packed modules, open types, external, ...? *)
