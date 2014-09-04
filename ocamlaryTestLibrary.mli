@@ -186,6 +186,44 @@ val changing : unit
 *)
 val with_foo : unit
 
+(** {3 Some Operators } *)
+
+val ( ~- ) : unit
+
+val ( ! ) : unit
+
+val ( @ ) : unit
+
+val ( $ ) : unit
+
+val ( % ) : unit
+
+val ( ^ ) : unit
+
+val ( & ) : unit
+
+val ( * ) : unit
+
+val ( - ) : unit
+
+val ( + ) : unit
+
+val ( < ) : unit
+
+val ( > ) : unit
+
+val ( -? ) : unit
+
+val ( / ) : unit
+
+val ( -| ) : unit
+
+(** TODO: re-enable after {{: https://github.com/lpw25/opam-doc-base/issues/35} lpw25/opam-doc-base#35}
+val ( := ) : unit
+*)
+
+val ( = ) : unit
+
 (** {3 Advanced Module Stuff} *)
 
 (** This comment is for [CollectionModule]. *)
