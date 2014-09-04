@@ -222,6 +222,10 @@ val ( := ) : unit
 
 val ( = ) : unit
 
+(**/**)
+(** I'm hidden *)
+(**/**)
+
 (** {3 Advanced Module Stuff} *)
 
 (** This comment is for [CollectionModule]. *)
