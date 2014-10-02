@@ -76,6 +76,12 @@
 module Empty : sig end
 (** This module has a signature without any members. *)
 
+(*(** An ambiguous, misnamed module type *)
+module type Empty = sig type t end*)
+
+(** An ambiguous, misnamed module type *)
+module type MissingComment = sig type t end
+
 (** {9000:s9000 Level 9000 } *)
 
 (** A plain module alias of [Empty] *)
@@ -97,11 +103,24 @@ module ModuleWithSignature : EmptySig
 *)
 module ModuleWithSignatureAlias : EmptySigAlias
 
+module One : sig type one end
+
+(** There's a signature in a module in this signature. *)
+module type SigForMod = sig
+  module Inner : sig
+    module type Empty = sig end
+  end
+end
+
 module type SuperSig = sig
   module type SubSigA = sig
     (** {3:subSig A Labeled Section Header Inside of a Signature} *)
 
     type t
+
+    module SubSigAMod : sig
+      type sub_sig_a_mod
+    end
   end
   module type SubSigB = sig
     (** {3:subSig Another Labeled Section Header Inside of a Signature} *)
@@ -111,6 +130,8 @@ module type SuperSig = sig
   module type EmptySig = sig
     type not_actually_empty
   end
+  (*module type One = sig type two end*)
+  (*module type SuperSig = sig end*)
 end
 
 (** For a good time, see
@@ -119,6 +140,11 @@ end
     interesting. {!EmptySig} is a general reference but
     {!section:emptySig} is the section and {!modtype:EmptySig} is the
     module signature. *)
+
+(** {!Buffer.t} *)
+module Buffer : sig
+  val f : Buffer.t -> unit
+end
 
 (** Some text before exception title. {3 Basic exception stuff} After exception title. *)
 

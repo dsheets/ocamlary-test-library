@@ -1,5 +1,10 @@
 (** An interface with all of the module system features *)
 
+module type Empty = sig type t end
+
+(** An ambiguous, misnamed module type *)
+module type MissingComment = sig type t end
+
 (** A plain, empty module. *)
 module Empty = struct end
 
@@ -18,11 +23,25 @@ module ModuleWithSignature = struct end
 (** A plain module with an alias signature. *)
 module ModuleWithSignatureAlias = struct end
 
+(** has type "one" *)
+module One = struct type one end
+
+(** There's a module in this signature. *)
+module type SigForMod = sig
+  module Inner : sig
+    module type Empty = sig end
+  end
+end
+
 module type SuperSig = sig
   module type SubSigA = sig
     (** {3:SubSig A Labeled Section Header Inside of a Signature *)
 
     type t
+
+    module SubSigAMod : sig
+      type sub_sig_a_mod
+    end
   end
   module type SubSigB = sig
     (** {3:SubSig Another Labeled Section Header Inside of a Signature *)
@@ -32,6 +51,13 @@ module type SuperSig = sig
   module type EmptySig = sig
     type not_actually_empty
   end
+  (*module type One = sig type two end*)
+  (*module type SuperSig = sig end*)
+end
+
+(** {!Buffer.t} *)
+module Buffer = struct
+  let f _ = ()
 end
 
 (** Unary exception constructor *)
