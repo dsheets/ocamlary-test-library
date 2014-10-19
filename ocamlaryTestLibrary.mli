@@ -15,6 +15,11 @@
  {- modules with aliased signatures}
 }
 
+A numbered list:
++ 3
++ 2
++ 1
+
     David Sheets is the author.
     @author David Sheets
 *)
@@ -184,7 +189,7 @@ val fun_maybe : ?yes:unit -> unit -> int
 (** @raise Not_found That's all it does *)
 val not_found : unit -> unit
 
-(** @see < http://ocaml.org/ > The OCaml Web site *)
+(** @see <http://ocaml.org/> The OCaml Web site *)
 val ocaml_org : string
 
 (** @see 'some_file' The file called [some_file] *)
