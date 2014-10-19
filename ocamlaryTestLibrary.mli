@@ -342,6 +342,16 @@ type record = {
 }
 (** This comment is also for [record]. *)
 
+type mutable_record = {
+  mutable a : int; (** [a] is first and mutable *)
+  b : unit; (** [b] is second and immutable *)
+  mutable c : int; (** [c] is third and mutable *)
+}
+
+type universe_record = {
+  nihilate : 'a. 'a -> unit;
+}
+
 (** This comment is for [variant]. *)
 type variant =
 | TagA (** This comment is for [TagA]. *)
