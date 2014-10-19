@@ -51,8 +51,8 @@ module type SuperSig = sig
   module type EmptySig = sig
     type not_actually_empty
   end
-  (*module type One = sig type two end*)
-  (*module type SuperSig = sig end*)
+  module type One = sig type two end
+  module type SuperSig = sig end
 end
 
 (** {!Buffer.t} *)
@@ -147,6 +147,8 @@ let ( = )  = ()
 module CollectionModule = struct
   (** This comment is for [collection]. *)
   type collection
+  type element
+
   (** This comment is for [InnerModuleA]. *)
   module InnerModuleA = struct
     (** This comment is for [t]. *)
@@ -165,6 +167,57 @@ module CollectionModule = struct
   end
   (** This comment is for [InnerModuleTypeA]. *)
   module type InnerModuleTypeA = InnerModuleA.InnerModuleTypeA'
+end
+
+(** module type of *)
+module type COLLECTION = module type of CollectionModule
+
+module Recollection(C : COLLECTION) :
+  COLLECTION with type collection = C.element list and type element = C.collection = struct
+  type collection = C.element list
+  type element = C.collection
+
+  (** This comment is for [InnerModuleA]. *)
+  module InnerModuleA = struct
+    (** This comment is for [t]. *)
+    type t = collection
+    (** This comment is for [InnerModuleA']. *)
+    module InnerModuleA' = struct
+      (** This comment is for [t]. *)
+      type t = (unit,unit) a_function
+    end
+
+    (** This comment is for [InnerModuleTypeA']. *)
+    module type InnerModuleTypeA' = sig
+      (** This comment is for [t]. *)
+      type t = InnerModuleA'.t
+    end
+  end
+  (** This comment is for [InnerModuleTypeA]. *)
+  module type InnerModuleTypeA = InnerModuleA.InnerModuleTypeA'
+end
+
+module type MMM = sig module C : COLLECTION end
+
+module type RECOLLECTION = MMM with module C = Recollection(CollectionModule)
+
+module type RecollectionModule = sig
+  include module type of Recollection(CollectionModule)
+end
+
+module type A = sig
+  type t
+  module Q : COLLECTION
+end
+
+module type B = sig
+  type t
+  module Q : COLLECTION
+end
+
+module type C = sig
+  include A
+  include B with type t := t and module Q := Q
 end
 
 (*

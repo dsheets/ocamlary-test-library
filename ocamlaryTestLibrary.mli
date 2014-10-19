@@ -76,8 +76,8 @@
 module Empty : sig end
 (** This module has a signature without any members. *)
 
-(*(** An ambiguous, misnamed module type *)
-module type Empty = sig type t end*)
+(** An ambiguous, misnamed module type *)
+module type Empty = sig type t end
 
 (** An ambiguous, misnamed module type *)
 module type MissingComment = sig type t end
@@ -130,8 +130,8 @@ module type SuperSig = sig
   module type EmptySig = sig
     type not_actually_empty
   end
-  (*module type One = sig type two end*)
-  (*module type SuperSig = sig end*)
+  module type One = sig type two end
+  module type SuperSig = sig end
 end
 
 (** For a good time, see
@@ -258,10 +258,13 @@ val ( = ) : unit
 module CollectionModule : sig
   (** This comment is for [collection]. *)
   type collection
+  type element
+
   (** This comment is for [InnerModuleA]. *)
   module InnerModuleA : sig
     (** This comment is for [t]. *)
     type t = collection
+
     (** This comment is for [InnerModuleA']. *)
     module InnerModuleA' : sig
       (** This comment is for [t]. *)
@@ -274,8 +277,39 @@ module CollectionModule : sig
       type t = InnerModuleA'.t
     end
   end
+
   (** This comment is for [InnerModuleTypeA]. *)
   module type InnerModuleTypeA = InnerModuleA.InnerModuleTypeA'
+end
+
+(** module type of *)
+module type COLLECTION = module type of CollectionModule
+
+module Recollection :
+  functor (C : COLLECTION) ->
+    COLLECTION with type collection = C.element list and type element = C.collection
+
+module type MMM = sig module C : COLLECTION end
+
+module type RECOLLECTION = MMM with module C = Recollection(CollectionModule)
+
+module type RecollectionModule = sig
+  include module type of Recollection(CollectionModule)
+end
+
+module type A = sig
+  type t
+  module Q : COLLECTION
+end
+
+module type B = sig
+  type t
+  module Q : COLLECTION
+end
+
+module type C = sig
+  include A
+  include B with type t := t and module Q := Q
 end
 
 (* TODO: figure out why this doesn't work
