@@ -315,6 +315,33 @@ type poly_variant_union = [
 | `TagC
 ]
 
+type 'a poly_poly_variant = [
+| `TagA of 'a
+]
+
+type ('a,'b) bin_poly_poly_variant = [
+| `TagA of 'a
+| `ConstrB of 'b
+]
+
+(* TODO: figure out how to spec a conjunctive type
+type amb_poly_variant = [
+| unit poly_poly_variant
+| (int,unit) bin_poly_poly_variant
+| `TagC
+]
+*)
+
+type 'a open_poly_variant  = [> `TagA ] as 'a
+
+type 'a open_poly_variant2 = [> `ConstrB of int ] as 'a
+
+type 'a open_poly_variant_alias = 'a open_poly_variant open_poly_variant2
+
+type 'a poly_fun = ([> `ConstrB of int ] as 'a) -> 'a
+
+type 'a poly_fun_constraint = 'a -> 'a constraint 'a = [> `TagA ]
+
 (** This comment is for [full_gadt_alias]. *)
 type ('a,'b) full_gadt_alias = ('a,'b) full_gadt =
 | Tag : (unit,unit) full_gadt_alias
