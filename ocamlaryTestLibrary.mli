@@ -451,14 +451,83 @@ type 'a partial_gadt_alias = 'a partial_gadt =
 (** This comment is for {!Exn_arrow}. *)
 exception Exn_arrow : unit -> exn
 
-(** This comment is for {!mutual_constr_a} and {!mutual_constr_b}. *)
+(** This comment is for {!mutual_constr_a} then {!mutual_constr_b}. *)
 type mutual_constr_a =
 | A
 | B_ish of mutual_constr_b
+(** This comment is between {!mutual_constr_a} and {!mutual_constr_b}. *)
 and mutual_constr_b =
 | B
 | A_ish of mutual_constr_a
+(** This comment must be here for the next to associate correctly. *)
+(** This comment is for {!mutual_constr_b} then {!mutual_constr_a}. *)
+
+type rec_obj = < f : int; g : unit -> unit; h : rec_obj >
+
+type 'a open_obj = < f : int; g : unit -> unit; .. > as 'a
+
+type 'a oof = (< a : unit; .. > as 'a) -> 'a
+
+type 'a any_obj = < .. > as 'a
+
+type empty_obj = < >
+
+type one_meth = < meth: unit >
+
+(** A mystery wrapped in an ellipsis *)
+type ext = ..
+
+type ext += ExtA
+type ext += ExtB
+type ext +=
+| ExtC of unit
+| ExtD of ext
+type ext += ExtE
+
+type ext += private ExtF
+
+type 'a poly_ext = ..
+(** 'a poly_ext *)
+
+type 'b poly_ext += Foo of 'b | Bar of 'b * 'b
+(** 'b poly_ext *)
+
+type 'c poly_ext += Quux of 'c
+(** 'c poly_ext *)
+
+module ExtMod : sig
+  type t = ..
+
+  type t += Leisureforce
+end
+
+type ExtMod.t += ZzzTop
+(** It's got the rock *)
+
+type ExtMod.t += ZzzTop of unit
+(** and it packs a unit. *)
+
+(** Rotate keys on my mark... *)
+external launch_missiles : unit -> unit = "tetris"
+
+(** A brown paper package tied up with string*)
+type my_mod = (module COLLECTION)
 
 class empty_class : object end
 
-(* TODO: classes, class types, packed modules, open types, external, ...? *)
+class one_method_class : object
+  method go : unit
+end
+
+class two_method_class : object
+  method one : one_method_class
+  method undo : unit
+end
+
+class ['a] param_class : 'a -> object
+  method v : 'a
+end
+
+type 'a my_unit_class = unit #param_class as 'a
+
+(* TODO: classes, class types, ...? *)

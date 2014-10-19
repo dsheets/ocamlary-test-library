@@ -366,4 +366,69 @@ and mutual_constr_b =
 | B
 | A_ish of mutual_constr_a
 
+type rec_obj = < f : int; g : unit -> unit; h : rec_obj >
+
+type 'a open_obj = < f : int; g : unit -> unit; .. > as 'a
+
+type 'a oof = (< a : unit; .. > as 'a) -> 'a
+
+type 'a any_obj = < .. > as 'a
+
+type empty_obj = < >
+
+type one_meth = < meth: unit >
+
+(** A mystery wrapped in an ellipsis *)
+type ext = ..
+
+type ext += ExtA
+type ext += ExtB
+type ext +=
+| ExtC of unit
+| ExtD of ext
+type ext += ExtE
+
+type ext += private ExtF
+
+type 'a poly_ext = ..
+(** 'a poly_ext *)
+
+type 'b poly_ext += Foo of 'b | Bar of 'b * 'b
+(** 'b poly_ext *)
+
+type 'c poly_ext += Quux of 'c
+
+module ExtMod = struct
+  type t = ..
+
+  type t += Leisureforce
+end
+
+type ExtMod.t += ZzzTop
+(** It's got the rock *)
+
+type ExtMod.t += ZzzTop of unit
+(** and it packs a unit. *)
+
+(** Rotate keys on my mark... *)
+external launch_missiles : unit -> unit = "tetris"
+
+(** A brown paper package tied up with string*)
+type my_mod = (module COLLECTION)
+
 class empty_class = object val x = 0 end
+
+class one_method_class = object
+  method go = ()
+end
+
+class two_method_class = object
+  method one = new one_method_class
+  method undo = ()
+end
+
+class ['a] param_class x = object
+  method v : 'a = x
+end
+
+type 'a my_unit_class = unit #param_class as 'a
