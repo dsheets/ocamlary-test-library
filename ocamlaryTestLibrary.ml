@@ -342,6 +342,25 @@ type 'a poly_fun = ([> `ConstrB of int ] as 'a) -> 'a
 
 type 'a poly_fun_constraint = 'a -> 'a constraint 'a = [> `TagA ]
 
+type 'a closed_poly_variant = [< `One | `Two ] as 'a
+
+type 'a clopen_poly_variant =
+[< `One | `Two of int | `Three > `Two `Three] as 'a
+
+type nested_poly_variant = [
+| `A
+| `B of [
+  | `B1
+  | `B2
+]
+| `C
+| `D of [
+  | `D1 of [
+    `D1a
+  ]
+]
+]
+
 (** This comment is for [full_gadt_alias]. *)
 type ('a,'b) full_gadt_alias = ('a,'b) full_gadt =
 | Tag : (unit,unit) full_gadt_alias

@@ -365,14 +365,14 @@ type variant =
 | ConstrD of (int * int)
 (** This comment is for unary [ConstrD] of binary tuple. *)
 (** This comment is also for [variant]. *)
-(* TODO: <https://github.com/lpw25/opam-doc-base/issues/55> blocks
+
 (** This comment is for [poly_variant]. *)
 type poly_variant = [
 | `TagA (** This comment is for [`TagA]. *)
 | `ConstrB of int (** This comment is for [`ConstrB]. *)
 ]
 (** Wow! It was a polymorphic variant! *)
-*)
+
 (** This comment is for [full_gadt]. *)
 type (_,_) full_gadt =
 | Tag : (unit,unit) full_gadt
@@ -406,7 +406,7 @@ type record_alias = record = {
   field1 : int;
   field2 : int;
 }
-(* TODO: <https://github.com/lpw25/opam-doc-base/issues/55> blocks
+
 (** This comment is for [poly_variant_union]. *)
 type poly_variant_union = [
 | poly_variant
@@ -439,7 +439,26 @@ type 'a open_poly_variant_alias = 'a open_poly_variant open_poly_variant2
 type 'a poly_fun = ([> `ConstrB of int ] as 'a) -> 'a
 
 type 'a poly_fun_constraint = 'a -> 'a constraint 'a = [> `TagA ]
-*)
+
+type 'a closed_poly_variant = [< `One | `Two ] as 'a
+
+type 'a clopen_poly_variant =
+[< `One | `Two of int | `Three > `Two `Three] as 'a
+
+type nested_poly_variant = [
+| `A
+| `B of [
+  | `B1
+  | `B2
+]
+| `C
+| `D of [
+  | `D1 of [
+    `D1a
+  ]
+]
+]
+
 (** This comment is for [full_gadt_alias]. *)
 type ('a,'b) full_gadt_alias = ('a,'b) full_gadt =
 | Tag : (unit,unit) full_gadt_alias
