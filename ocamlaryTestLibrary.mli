@@ -115,7 +115,7 @@ module ModuleWithSignatureAlias : EmptySigAlias
 
 module One : sig type one end
 
-(** There's a signature in a module in this signature. *)
+(** There's a signature in a module ({!Inner}) in this signature. *)
 module type SigForMod = sig
   module Inner : sig
     module type Empty = sig end
