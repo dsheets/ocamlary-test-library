@@ -20,6 +20,8 @@ A numbered list:
 + 2
 + 1
 
+    The email address of a fake user is <user@example.org>.
+
     David Sheets is the author.
     @author David Sheets
 *)
