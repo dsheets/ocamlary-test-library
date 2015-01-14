@@ -507,6 +507,10 @@ type 'a poly_fun_constraint = 'a -> 'a constraint 'a = [> `TagA ]
 
 type 'a closed_poly_variant = [< `One | `Two ] as 'a
 
+(* Compiler bug *)
+(* type 'a closed_poly_conj_0 = [< `One of & int] as 'a *)
+type 'a closed_poly_conj = [< `Two of float & int] as 'a
+
 type 'a clopen_poly_variant =
 [< `One | `Two of int | `Three > `Two `Three] as 'a
 
