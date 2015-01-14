@@ -209,7 +209,11 @@ val fun_maybe_higher : ?maybe:(unit -> unit) -> (unit -> unit)
 val fun_labeled_higher : f:(unit -> unit) -> unit
 
 (**
-   []
+   this is a literal list literal: []
+
+   this is a quoted list literal: [[]]
+
+   this is an escaped list literal: \[\]
 *)
 val fun_default : ?default:int list -> unit -> int
 
